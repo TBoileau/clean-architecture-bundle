@@ -6,14 +6,10 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use TBoileau\CleanArchitecture\BusinessRules\Annotation\UseCase;
-use TBoileau\CleanArchitecture\BusinessRules\Request\RequestFactory;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
-use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseFactory;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
-use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseFactory;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
 
