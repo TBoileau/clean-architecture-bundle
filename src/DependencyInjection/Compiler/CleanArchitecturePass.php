@@ -21,6 +21,10 @@ use TBoileau\CleanArchitecture\BusinessRules\UseCase\{
     UseCaseFactory,
     UseCaseFactoryInterface
 };
+use  TBoileau\CleanArchitecture\UserInterface\Presenter\{
+    Presenter,
+    PresenterInterface
+};
 
 /**
  * Class CleanArchitecturePass
@@ -35,6 +39,10 @@ class CleanArchitecturePass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         $resolver = $container->register("t_boileau.use_case_resolver", UseCaseResolver::class);
+
+        $responseFactory = $container->register("t_boileau.presenter", Presenter::class);
+        $responseFactory->addArgument($this->processByTagName($container, 't_boileau.view_model'));
+        $container->setAlias(PresenterInterface::class, "t_boileau.presenter");
 
         $responseFactory = $container->register("t_boileau.response_factory", ResponseFactory::class);
         $responseFactory->addArgument($this->processByTagName($container, 't_boileau.response'));
