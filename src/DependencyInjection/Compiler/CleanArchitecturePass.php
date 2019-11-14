@@ -6,10 +6,14 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
+use TBoileau\CleanArchitecture\BusinessRules\Annotation\UseCase;
+use TBoileau\CleanArchitecture\BusinessRules\Request\RequestFactory;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
+use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseFactory;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
+use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseFactory;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseFactoryInterface;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
 
@@ -30,13 +34,13 @@ class CleanArchitecturePass implements CompilerPassInterface
         $container->registerForAutoconfiguration(RequestInterface::class)->addTag('t_boileau.request');
 
         $useCaseFactory = $container->getDefinition(UseCaseFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processUseCases($container, 't_boileau.use_case'));
+        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.use_case'));
 
         $useCaseFactory = $container->getDefinition(ResponseFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processUseCases($container, 't_boileau.response'));
+        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.response'));
 
         $useCaseFactory = $container->getDefinition(RequestFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processUseCases($container, 't_boileau.request'));
+        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.request'));
     }
 
     /**
@@ -44,7 +48,7 @@ class CleanArchitecturePass implements CompilerPassInterface
      * @param string $tagName
      * @return Reference
      */
-    private function processByTag(ContainerBuilder $container, string $tagName): Reference
+    private function processByTagName(ContainerBuilder $container, string $tagName): Reference
     {
         /** @var Reference[] $servicesMap */
         $servicesMap = [];
