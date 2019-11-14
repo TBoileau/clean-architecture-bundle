@@ -7,7 +7,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
-use TBoileau\CleanArchitecture\BusinessRules\UserInterface\ViewModelInterface;
+use TBoileau\CleanArchitecture\UserInterface\ViewModel\ViewModelInterface;
 
 /**
  * Class TBoileauCleanArchitectureExtension
