@@ -1,0 +1,22 @@
+{
+    "name": "tboileau/clean-architecture-bundle",
+    "description": "Clean Architecture Bundle for Symfony 4",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Thomas Boileau",
+            "email": "t-boileau@email.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "tboileau/clean-architecture": "1.*",
+        "symfony/http-kernel": "~4.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "TBoileau\\Bundle\\CleanArchitectureBundle\\": "src"
+        }
+    }
+}
