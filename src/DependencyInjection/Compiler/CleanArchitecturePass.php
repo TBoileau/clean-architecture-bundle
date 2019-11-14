@@ -2,16 +2,25 @@
 
 namespace TBoileau\Bundle\CleanArchitectureBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\Compiler\ServiceLocatorTagPass;
+use Symfony\Component\DependencyInjection\Compiler\{
+    CompilerPassInterface,
+    ServiceLocatorTagPass
+};
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-use TBoileau\CleanArchitecture\BusinessRules\Request\RequestFactoryInterface;
-use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
-use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseFactoryInterface;
-use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
-use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseFactoryInterface;
-use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
+use TBoileau\CleanArchitecture\BusinessRules\Request\{
+    RequestFactory,
+    RequestFactoryInterface
+};
+use TBoileau\CleanArchitecture\BusinessRules\Resolver\UseCaseResolver;
+use TBoileau\CleanArchitecture\BusinessRules\Response\{
+    ResponseFactory,
+    ResponseFactoryInterface
+};
+use TBoileau\CleanArchitecture\BusinessRules\UseCase\{
+    UseCaseFactory,
+    UseCaseFactoryInterface
+};
 
 /**
  * Class CleanArchitecturePass
@@ -25,18 +34,22 @@ class CleanArchitecturePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        $container->registerForAutoconfiguration(UseCaseInterface::class)->addTag('t_boileau.use_case');
-        $container->registerForAutoconfiguration(ResponseInterface::class)->addTag('t_boileau.response');
-        $container->registerForAutoconfiguration(RequestInterface::class)->addTag('t_boileau.request');
+        $resolver = $container->register("t_boileau.use_case_resolver", UseCaseResolver::class);
 
-        $useCaseFactory = $container->getDefinition(UseCaseFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.use_case'));
+        $responseFactory = $container->register("t_boileau.response_factory", ResponseFactory::class);
+        $responseFactory->addArgument($this->processByTagName($container, 't_boileau.response'));
+        $container->setAlias(ResponseFactoryInterface::class, "t_boileau.response_factory");
 
-        $useCaseFactory = $container->getDefinition(ResponseFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.response'));
+        $requestFactory = $container->register("t_boileau.request_factory", RequestFactory::class);
+        $requestFactory->addArgument($this->processByTagName($container, 't_boileau.request'));
+        $container->setAlias(RequestFactoryInterface::class, "t_boileau.request_factory");
 
-        $useCaseFactory = $container->getDefinition(RequestFactoryInterface::class);
-        $useCaseFactory->replaceArgument(0, $this->processByTagName($container, 't_boileau.request'));
+        $useCaseFactory = $container->register("t_boileau.use_case_factory", UseCaseFactory::class);
+        $useCaseFactory->addArgument($this->processByTagName($container, 't_boileau.use_case'));
+        $useCaseFactory->addArgument($requestFactory);
+        $useCaseFactory->addArgument($responseFactory);
+        $useCaseFactory->addArgument($resolver);
+        $container->setAlias(UseCaseFactoryInterface::class, "t_boileau.use_case_factory");
     }
 
     /**

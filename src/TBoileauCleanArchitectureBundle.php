@@ -5,6 +5,7 @@ namespace TBoileau\Bundle\CleanArchitectureBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use TBoileau\Bundle\CleanArchitectureBundle\DependencyInjection\Compiler\CleanArchitecturePass;
+use TBoileau\Bundle\CleanArchitectureBundle\DependencyInjection\TBoileauCleanArchitectureExtension;
 
 /**
  * Class TBoileauCleanArchitectureBundle
@@ -20,4 +21,13 @@ class TBoileauCleanArchitectureBundle extends Bundle
     {
         $container->addCompilerPass(new CleanArchitecturePass());
     }
+
+    /**
+     * @inheritDoc
+     */
+    protected function getContainerExtensionClass()
+    {
+        return TBoileauCleanArchitectureExtension::class;
+    }
+
 }
