@@ -1101,16 +1101,16 @@
         },
         {
             "name": "tboileau/clean-architecture",
-            "version": "1.1",
+            "version": "1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TBoileau/clean-architecture.git",
-                "reference": "08a8d2c8b3adb5c7be8525f442b671245d11cc45"
+                "reference": "5f053d0f7437d18a30a578b638430fcb00dcdc68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TBoileau/clean-architecture/zipball/08a8d2c8b3adb5c7be8525f442b671245d11cc45",
-                "reference": "08a8d2c8b3adb5c7be8525f442b671245d11cc45",
+                "url": "https://api.github.com/repos/TBoileau/clean-architecture/zipball/5f053d0f7437d18a30a578b638430fcb00dcdc68",
+                "reference": "5f053d0f7437d18a30a578b638430fcb00dcdc68",
                 "shasum": ""
             },
             "require": {
@@ -1141,7 +1141,7 @@
                 }
             ],
             "description": "Clean Architecture Library",
-            "time": "2019-11-14T13:21:27+00:00"
+            "time": "2019-11-18T00:34:54+00:00"
         }
     ],
     "packages-dev": [],

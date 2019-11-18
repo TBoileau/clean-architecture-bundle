@@ -7,6 +7,7 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
+use TBoileau\CleanArchitecture\BusinessRules\Representation\RepresentationInterface;
 use TBoileau\CleanArchitecture\UserInterface\ViewModel\ViewModelInterface;
 
 /**
@@ -40,5 +41,7 @@ class TBoileauCleanArchitectureExtension extends Extension
             ->registerForAutoconfiguration(ViewModelInterface::class)
             ->addTag('t_boileau.view_model')
         ;
+
+        $container->registerForAutoconfiguration(RepresentationInterface::class);
     }
 }
