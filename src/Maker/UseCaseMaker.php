@@ -69,7 +69,7 @@ class UseCaseMaker extends AbstractMaker
 
         $unitTestClassNameDetails = $generator->createClassNameDetails(
             $input->getArgument('name'),
-            sprintf('App\\Tests\\UnitTests\\\%s', $input->getArgument('domain')),
+            sprintf('App\\Tests\\UnitTests\\%s', $input->getArgument('domain')),
             'Test'
         );
 
