@@ -7,6 +7,8 @@ use Symfony\Bundle\MakerBundle\DependencyBuilder;
 use Symfony\Bundle\MakerBundle\Generator;
 use Symfony\Bundle\MakerBundle\InputConfiguration;
 use Symfony\Bundle\MakerBundle\Maker\AbstractMaker;
+use Symfony\Bundle\MakerBundle\MakerInterface;
+use Symfony\Bundle\MakerBundle\Str;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -82,10 +84,12 @@ class UseCaseMaker extends AbstractMaker
             ]
         );
 
-        $generator->generateClass(
-            $unitTestClassNameDetails->getFullName(),
+        $generator->generateFile(
+            sprintf('tests/UnitTests/%s/%s', $input->getArgument('domain'), $unitTestClassNameDetails->getRelativeName()),
             __DIR__ . '/../Resources/skeleton/unit_test.tpl.php',
             [
+                'namespace' => Str::getNamespace($unitTestClassNameDetails->getFullName()),
+                'class_name' => Str::getShortClassName($unitTestClassNameDetails->getFullName()) ,
                 'request' => $requestClassNameDetails,
                 'response' => $responseClassNameDetails,
                 'useCase' => $useCaseClassNameDetails
