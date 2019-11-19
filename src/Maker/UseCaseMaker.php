@@ -67,12 +67,28 @@ class UseCaseMaker extends AbstractMaker
             'Response'
         );
 
+        $unitTestClassNameDetails = $generator->createClassNameDetails(
+            $input->getArgument('name'),
+            sprintf('App\\Tests\\UnitTests\\\%s', $input->getArgument('domain')),
+            'Test'
+        );
+
         $generator->generateClass(
             $useCaseClassNameDetails->getFullName(),
             __DIR__ . '/../Resources/skeleton/use_case.tpl.php',
             [
                 'request' => $requestClassNameDetails->getFullName(),
                 'response' => $responseClassNameDetails->getFullName(),
+            ]
+        );
+
+        $generator->generateClass(
+            $unitTestClassNameDetails->getFullName(),
+            __DIR__ . '/../Resources/skeleton/unit_test.tpl.php',
+            [
+                'request' => $requestClassNameDetails,
+                'response' => $responseClassNameDetails,
+                'use_case' => $useCaseClassNameDetails
             ]
         );
 

@@ -13,7 +13,7 @@ use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
  *     response="<?= $response ?>"
  * )
  */
-class <?= $class_name ?> extends UseCaseInterface
+class <?= $class_name ?> implements UseCaseInterface
 {
     /**
      * @inheritDocs

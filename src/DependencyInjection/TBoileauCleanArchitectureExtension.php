@@ -22,6 +22,8 @@ class TBoileauCleanArchitectureExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
+        $container->register(UseCaseMaker::class, UseCaseMaker::class)->addTag('maker.command');
+
         $container
             ->registerForAutoconfiguration(UseCaseInterface::class)
             ->addTag('t_boileau.use_case')
