@@ -4,6 +4,7 @@ namespace TBoileau\Bundle\CleanArchitectureBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use TBoileau\Bundle\CleanArchitectureBundle\Maker\UseCaseMaker;
 use TBoileau\CleanArchitecture\BusinessRules\Request\RequestInterface;
 use TBoileau\CleanArchitecture\BusinessRules\Response\ResponseInterface;
 use TBoileau\CleanArchitecture\BusinessRules\UseCase\UseCaseInterface;
@@ -22,7 +23,7 @@ class TBoileauCleanArchitectureExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $container->register(UseCaseMaker::class, UseCaseMaker::class)->addTag('maker.command');
+        $container->register("t_boileau.maker.use_case", UseCaseMaker::class)->addTag('maker.command');
 
         $container
             ->registerForAutoconfiguration(UseCaseInterface::class)
