@@ -85,7 +85,7 @@ class UseCaseMaker extends AbstractMaker
         );
 
         $generator->generateFile(
-            sprintf('tests/UnitTests/%s/%s', $input->getArgument('domain'), $unitTestClassNameDetails->getRelativeName()),
+            sprintf('tests/UnitTests/%s/%s.php', $input->getArgument('domain'), $unitTestClassNameDetails->getRelativeName()),
             __DIR__ . '/../Resources/skeleton/unit_test.tpl.php',
             [
                 'namespace' => Str::getNamespace($unitTestClassNameDetails->getFullName()),
