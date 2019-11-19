@@ -88,7 +88,7 @@ class UseCaseMaker extends AbstractMaker
             [
                 'request' => $requestClassNameDetails,
                 'response' => $responseClassNameDetails,
-                'use_case' => $useCaseClassNameDetails
+                'useCase' => $useCaseClassNameDetails
             ]
         );
 
